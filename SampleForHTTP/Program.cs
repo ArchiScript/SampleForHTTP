@@ -19,12 +19,12 @@ namespace SampleForHTTP
             Team team = new Team()
 
             {
-                Id = 123,
-                Name = "Arsenal",
-                FoundationYear = 2009,
+                Id = 1018,
+                Name = "Тираспольская Народная Сборная",
+                FoundationYear = 1990,
                 Conference = "A",
                 Division = "d",
-                ImageUrl = "dfkj"
+                ImageUrl = "SuperImageURL"
 
             };
             await teamService.Add(team);
@@ -36,11 +36,11 @@ namespace SampleForHTTP
                 Name = "Archi",
                 Number = 4,
                 Position = "Forward",
-                Team = 649,
+                Team = 1017,
                 Birthday = new DateTime(1985, 5, 6),
                 Heigth = 190,
                 Weigth = 90,
-                AvatarUrl = "fjwlefjURL",
+                AvatarUrl = "MyAvaURL",
                 Id = 9,
                 TeamName = "Arsenal"
 
