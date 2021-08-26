@@ -9,45 +9,45 @@ using System.Net.Http.Headers;
 
 namespace SampleForHTTP.Services
 {
-    class TeamService
+    class PlayerService
     {
         private readonly string _token;
 
-        public TeamService(string token)
+        public PlayerService(string token)
         {
             _token = token ?? throw new ArgumentNullException(nameof(token));
         }
 
-        public async Task Add(Team team)
+        public async Task Add(Player player)
         {
-            string serializedTeam = JsonConvert.SerializeObject(team);
-            var content = new StringContent(serializedTeam, Encoding.UTF8, "application/json");
+            string serializedPlayer = JsonConvert.SerializeObject(player);
+            var content = new StringContent(serializedPlayer, Encoding.UTF8, "application/json");
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization = AuthenticationHeaderValue.Parse(_token);
-                var response = await client.PostAsync("http://dev.trainee.dex-it.ru/api/Team/Add", content);
+                var response = await client.PostAsync("http://dev.trainee.dex-it.ru/api/Player/Add", content);
 
             }
 
         }
 
-        public async Task<TeamResponse> GetTeams()
+        public async Task<PlayerRepsonse> GetPlayers()
         {
             HttpResponseMessage responseMessage;
-            TeamResponse teamResponse;
+            PlayerRepsonse playerResponse;
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Authorization =
                     AuthenticationHeaderValue.Parse(_token);
-                responseMessage = await client.GetAsync("http://dev.trainee.dex-it.ru/api/Team/GetTeams");
+                responseMessage = await client.GetAsync("http://dev.trainee.dex-it.ru/api/Player/GetPlayers");
 
                 responseMessage.EnsureSuccessStatusCode();
 
                 string serialzeMessage = await responseMessage.Content.ReadAsStringAsync();
-                teamResponse = JsonConvert.DeserializeObject<TeamResponse>(serialzeMessage);
+                playerResponse = JsonConvert.DeserializeObject<PlayerRepsonse>(serialzeMessage);
 
             }
-            return teamResponse;
+            return playerResponse;
         }
     }
 }
